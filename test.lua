@@ -9,15 +9,33 @@ if monitor then
     local ui = UI:new()
 
     print("Test de création de boutons :")
-    local button1 = ui:addButton(5, 5, "Click me", colors.blue, function()
-        print("Button 1 clicked!")
-    end)
-    local button2 = ui:addButton(5, 7, "Another button", colors.green, function()
-        print("Button 2 clicked!")
-    end)
-    local button3 = ui:addButton(5, 9, "", colors.red, function()
-        print("Button 3 clicked!")
-    end)
+    local button1 = ui:addButton({
+        x = 5,
+        y = 5,
+        text = "Click me",
+        color = colors.blue,
+        textColor = colors.white,
+        onClick = function()
+            print("Button 1 clicked!")
+        end
+    })
+    local button2 = ui:addButton({
+        x = 5,
+        y = 7,
+        text = "Another button",
+        color = colors.green,
+        onClick = function()
+            print("Button 2 clicked!")
+        end
+    })
+    local button3 = ui:addButton({
+        x = 5,
+        y = 9,
+        color = colors.red,
+        onClick = function()
+            print("Button 3 clicked!")
+        end
+    })
 
     monitor.setBackgroundColor(colors.black)
     monitor.clear()
@@ -26,7 +44,7 @@ if monitor then
     print("Test de mise à jour de boutons :")
     ui:updateButton(button1, { text = "Updated text", color = colors.orange })
     ui:updateButton(button2, { x = 10, y = 8 })
-    ui:updateButton(button3, { text = "New text", color = colors.purple })
+    ui:updateButton(button3, { text = "New text", color = colors.purple, textColor = colors.white })
     ui:render(monitor)
 
     print("Test de suppression de boutons :")

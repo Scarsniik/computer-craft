@@ -11,18 +11,17 @@ function UI:new()
   return obj
 end
 
-function UI:addButton(x, y, text, color, onClick)
-  text = text or ""
-  color = color or colors.white
-  onClick = onClick or function() end
+function UI:addButton(properties)
+  properties = properties or {}
   local id = #self.buttons + 1
   self.buttons[id] = {
-    x = x,
-    y = y,
-    text = text,
-    color = color,
-    onClick = onClick,
-    width = #text
+    x = properties.x or 1,
+    y = properties.y or 1,
+    text = properties.text or "",
+    color = properties.color or colors.white,
+    textColor = properties.textColor or colors.black,
+    onClick = properties.onClick or function() end,
+    width = #(properties.text or "")
   }
   return id
 end
@@ -45,6 +44,7 @@ end
 function UI:render(monitor)
   for _, button in pairs(self.buttons) do
     monitor.setBackgroundColor(button.color)
+    monitor.setTextColor(button.textColor)
     monitor.setCursorPos(button.x, button.y)
     monitor.write(button.text)
   end
