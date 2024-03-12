@@ -22,15 +22,20 @@ if monitor then
 
     -- Fonctions
     local function drawCanvas()
-        monitor.setBackgroundColor(colors.black)
-        monitor.clear()
-        for y = 1, HEIGHT do
-            for x = MENU_WIDTH + 1, WIDTH do
-                monitor.setBackgroundColor(canvas[y] and canvas[y][x] or colors.black)
-                monitor.setCursorPos(x, y)
-                monitor.write(" ")
-            end
-        end
+      monitor.setBackgroundColor(colors.black)
+      monitor.clear()
+      for y = 1, HEIGHT do
+          for x = 1, WIDTH do
+              if x > MENU_WIDTH then
+                  monitor.setBackgroundColor(canvas[y] and canvas[y][x] or colors.black)
+                  monitor.setCursorPos(x, y)
+                  monitor.write(" ")
+              else
+                  monitor.setCursorPos(x, y)
+                  monitor.write(" ")
+              end
+          end
+      end
     end
 
     local function saveImage()
