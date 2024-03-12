@@ -6,7 +6,7 @@ local files = {
   }
   
   -- URL du dépôt GitHub
-  local repo_url = "https://github.com/Scarsniik/computer-craft/main/"
+  local repo_url = "https://raw.githubusercontent.com/Scarsniik/computer-craft/main/"
   
   -- Fonction pour télécharger un fichier
   function download_file(url, filename)
