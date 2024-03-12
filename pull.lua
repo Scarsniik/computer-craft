@@ -1,12 +1,12 @@
 -- Liste des fichiers à récupérer
 local files = {
-    "fichier1.lua",
-    "dossier/fichier2.lua",
-    "autre_dossier/fichier3.lua"
+    "basic.lua",
+    "paint.lua",
+    "ui.lua"
   }
   
   -- URL du dépôt GitHub
-  local repo_url = "https://raw.githubusercontent.com/VotreNomUtilisateur/votre-depot/main/"
+  local repo_url = "https://github.com/Scarsniik/computer-craft/main/"
   
   -- Fonction pour télécharger un fichier
   function download_file(url, filename)
