@@ -100,6 +100,7 @@ if monitor then
         text = "New",
         onClick = function()
           canvas = {}
+          drawCanvas()
         end
       })
       ui:addButton({
