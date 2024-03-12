@@ -18,6 +18,9 @@ if monitor then
     local button3 = ui:addButton(5, 9, "", colors.red, function()
         print("Button 3 clicked!")
     end)
+
+    monitor.setBackgroundColor(colors.black)
+    monitor.clear()
     ui:render(monitor)
 
     print("Test de mise à jour de boutons :")
@@ -31,10 +34,19 @@ if monitor then
     ui:render(monitor)
 
     print("Test de clics sur les boutons :")
-    ui:click(5, 5) -- Devrait déclencher le bouton 1
-    ui:click(10, 8) -- Devrait déclencher le bouton 2 (qui a été supprimé)
-    ui:click(5, 9) -- Devrait déclencher le bouton 3
-    ui:click(1, 1) -- Ne devrait déclencher aucun bouton
+    print("Cliquez sur les boutons de l'écran.")
+    print("Appuyez sur 'q' pour quitter.")
+
+    while true do
+        local event, side, x, y = os.pullEvent()
+        if event == "monitor_touch" and side == peripheral.getName(monitor) then
+            print("Clic détecté aux coordonnées (x: " .. x .. ", y: " .. y .. ")")
+            ui:click(x, y)
+        elseif event == "key" and side == "q" then
+            print("Touche 'q' enfoncée. Fin des tests.")
+            break
+        end
+    end
 
     print("Test de dessin graphique :")
     monitor.setBackgroundColor(colors.white)
