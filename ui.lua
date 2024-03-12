@@ -21,7 +21,8 @@ function UI:addButton(x, y, text, color, onClick)
     y = y,
     text = text,
     color = color,
-    onClick = onClick
+    onClick = onClick,
+    width = #text
   }
   return id
 end
@@ -31,6 +32,9 @@ function UI:updateButton(id, properties)
     for key, value in pairs(properties) do
       self.buttons[id][key] = value
     end
+    if properties.text then
+      self.buttons[id].width = #properties.text
+    end
   end
 end
 
@@ -39,22 +43,20 @@ function UI:removeButton(id)
 end
 
 function UI:render(monitor)
-    for _, button in pairs(self.buttons) do
-        print(button.text)
-        monitor.setBackgroundColor(button.color)
-        monitor.setCursorPos(button.x, button.y)
-        local buttonText = string.sub(button.text .. string.rep(" ", monitor.getSize() - button.x + 1), 1, monitor.getSize() - button.x + 1)
-        monitor.write(buttonText)
-    end
+  for _, button in pairs(self.buttons) do
+    monitor.setBackgroundColor(button.color)
+    monitor.setCursorPos(button.x, button.y)
+    monitor.write(button.text)
+  end
 end
 
 function UI:click(x, y)
-    for _, button in pairs(self.buttons) do
-      if x >= button.x and x < button.x + #button.text and y == button.y then
-        button.onClick()
-        break
-      end
+  for _, button in pairs(self.buttons) do
+    if x >= button.x and x < button.x + button.width and y == button.y then
+      button.onClick()
+      break
     end
+  end
 end
 
 return UI
